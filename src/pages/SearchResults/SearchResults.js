@@ -15,7 +15,15 @@ import { Configure } from 'react-instantsearch-dom';
 import { Pagination } from 'react-instantsearch-dom';
 import { RangeSlider } from 'react-instantsearch-dom';
 import { RangeInput } from 'react-instantsearch-dom';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
+function openNav() {
+    document.getElementById("searchSidebar").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("searchSidebar").style.width = "0";
+}
 
 function SearchResults() {
     const [wurkers, setWurkers] = useState([]);
@@ -83,24 +91,10 @@ function SearchResults() {
                             hitsPerPage={20}
                         />
                         <div className='d-flex searchResults__sortBox'>
-                            <div className=''>
-                                <SortBy
-                                    defaultRefinement='wurkers'
-                                    items={[
-                                        { label: 'Rate', value: 'rate' },
-                                        { label: 'Low - High', value: 'wurkers/sort/rate:asc' },
-                                        { label: ' High - Low', value: 'wurkers/sort/rate:desc' }
-                                    ]}
-                                />
-                                <SortBy
-                                    defaultRefinement='wurkers'
-                                    items={[
-                                        { label: 'Years Exp', value: 'yearsOfExp' },
-                                        { label: 'Low - High', value: 'wurkers/sort/years_of_exp:asc' },
-                                        { label: ' High - Low', value: 'wurkers/sort/years_of_exp:desc' }
-                                    ]}
-                                />
-                            </div>
+                            <FilterListIcon
+                                className='filterSearchResults__searchFilterIcon'
+                                onClick={openNav}
+                            />
                             <SearchBox
                                 translations={{ placeholder: 'Search wurkers ... ex. full stack developer, react', submitTitle: `${searchParams}` }}
                                 className='search-box'
@@ -112,42 +106,59 @@ function SearchResults() {
                                 }}
                             />
                         </div>
-                        <div className='d-flex'>
+                        <div className='searchResults__container'>
+                            <Pagination />
+                            <Stats />
+                            <Hits hitComponent={Hit} />
+                        </div>
+                        <div id="searchSidebar" className="sidebarFilter shadow">
+                            <button className="closebtn" onClick={() => closeNav()}>×</button>
                             <div>
-                                <h3 className='wurklo__textColor'>Skill</h3>
+                                <SortBy
+                                    className='text-center'
+                                    defaultRefinement='wurkers'
+                                    items={[
+                                        { label: 'Rate', value: 'rate' },
+                                        { label: 'Low - High', value: 'wurkers/sort/rate:asc' },
+                                        { label: ' High - Low', value: 'wurkers/sort/rate:desc' }
+                                    ]}
+                                />
+                                <SortBy
+                                    className='text-center'
+                                    defaultRefinement='wurkers'
+                                    items={[
+                                        { label: 'Years Exp', value: 'yearsOfExp' },
+                                        { label: 'Low - High', value: 'wurkers/sort/years_of_exp:asc' },
+                                        { label: ' High - Low', value: 'wurkers/sort/years_of_exp:desc' }
+                                    ]}
+                                />
+                                <h5 className='ms-2'>Skill</h5>
                                 <RefinementList
-                                    className="text-white"
+                                    className="ms-2"
                                     attribute="skill"
                                     limit={10}
                                 />
-                                <hr className='text-white' />
-                                <h3 className='wurklo__textColor'>Highest Education</h3>
+                                <hr />
+                                <h5>Highest Education</h5>
                                 <RefinementList
-                                    className="text-white"
+                                    className="ms-2"
                                     attribute="highest_edu"
                                     limit={10}
                                 />
-                                <hr className='text-white' />
-                                <h3 className='wurklo__textColor'>Certs/Licenses</h3>
+                                <hr />
+                                <h5>Certs/Licenses</h5>
                                 <RefinementList
-                                    className="text-white"
+                                    className="ms-2"
                                     attribute="certs_licenses"
                                     limit={10}
                                 />
-                                <hr className='text-white' />
-                                <h3 className='wurklo__textColor'>Availability</h3>
+                                <hr />
+                                <h5>Availability</h5>
                                 <RefinementList
-                                    className="text-white"
+                                    className="ms-2"
                                     attribute="availability"
                                     limit={10}
                                 />
-                            </div>
-                            <div>
-                                <Pagination
-
-                                />
-                                <Stats />
-                                <Hits hitComponent={Hit} />
                             </div>
                         </div>
 

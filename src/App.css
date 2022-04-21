@@ -39,18 +39,18 @@ a:link {
   color: #e0e1dd;
 }
 
-
+/* searchpage  */
 .search-box input {
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 10px 10px 10px 10px;
   margin-left: 1rem;
   border-radius: 10rem;
-  width: 35em;
+  width: 25rem;
   border: none;
 }
 .searchResults__sortBox {
   position: absolute;
-  top: .7rem;
-  right: 32rem;
+  top: 15px;
+  right: 38%;
 }
 .ais-Stats {
   padding: 1rem;
@@ -64,14 +64,55 @@ a:link {
   margin-left: 1rem;
   color: #e0e1dd;
 }
+.ais-Hits-list {
+
+}
 .ais-SortBy-select {
   border-radius: 10rem;
   margin-bottom: 0.3rem;
   padding: 0.1rem;
 }
 .ais-RefinementList-labelText {
-  margin-left: 1rem;
-  color: #e0e1dd;
+  margin-left: 10px !important;
+}
+.sidebarFilter {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidebarFilter a, button {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  border: none;
+  background-color: white;
+}
+.sidebarFilter a:hover, button:hover {
+  color: #f1f1f1;
+  transition: 0.5s;
+}
+.sidebarFilter .closebtn {
+  position: absolute;
+  top: 0;
+  left: -15px;
+  font-size: 36px;
+  background-color: transparent;
+}
+.searchResults__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -459,7 +500,7 @@ img.navbar-coin {
 /* filter search results  */
 .filterSearchResults__searchFilterIcon {
   position: absolute;
-  top: 0.9rem;
+  top: 10px;
   left: -1.5rem;
   color: #e0e1dd;
 }
@@ -686,12 +727,11 @@ footer {
     margin-bottom: 1.2rem;
   }
   .search-box input {
-    width: 5rem;
+    width: 9rem;
   }
   .searchResults__sortBox {
     position: absolute;
-    top: .7rem;
-    right: 6rem;
+    top: 15px;
   }
 }
 
@@ -712,6 +752,11 @@ footer {
   }
   .header__logoText {
     display: none;
+  }
+  .searchResults__sortBox {
+    position: absolute;
+    top: 10px;
+    right: 26%;
   }
 }
 
@@ -770,7 +815,7 @@ footer {
   }
   .searchResults__sortBox {
     position: absolute;
-    top: .7rem;
-    right: 10rem;
+    top: .3rem;
+    right: 5rem;
   }
 }
