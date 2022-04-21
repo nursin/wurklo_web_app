@@ -9,7 +9,6 @@ import { setUser } from '../redux/slices/user';
 import { auth } from '../firebase';
 import JoinNowModal from './JoinNowModal';
 import logo from '../images/wurklo-logo-e0e1dd.svg'
-import FilterSearchResults from './FilterSearchResults';
 
 function openNav() {
     document.getElementById("mySidebar").style.width = "250px";

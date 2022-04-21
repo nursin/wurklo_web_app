@@ -37,12 +37,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/search-results/:searchParams" element={<SearchResults />} />
+          <Route path="/search-results" element={<SearchResults />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/my-account/" element={<MyAccount />} />
-          <Route path="/messages/" element={<Messages />} />
-          <Route path="/chat/" element={<Chat />} />
-          <Route path="/contacts/" element={<Contacts />} />
+          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/contacts" element={<Contacts />} />
         </Routes>
       </BrowserRouter>
     </div>

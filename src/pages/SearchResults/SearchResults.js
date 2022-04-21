@@ -7,6 +7,7 @@ import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import { useNavigate } from "react-router-dom";
 import { SortBy, Pagination, Configure, RefinementList } from 'react-instantsearch-dom';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { useDispatch, useSelector } from 'react-redux';
 
 function openNav() {
     document.getElementById("searchSidebar").style.width = "250px";
@@ -19,9 +20,7 @@ function closeNav() {
 function SearchResults() {
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
-
-    // the below need to be moved after setting searchParams/filters in redux
-    const { searchParams } = useParams();
+    const { searchParams } = useSelector((state) => state.search);
 
     // Create a Typesense Client using the search-only API key
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -54,10 +53,6 @@ function SearchResults() {
         />
     )
 
-    useEffect(() => {
-
-    }, [searchParams])
-
     return (
         <Container fluid>
             <Row className='me-0'>
@@ -74,11 +69,9 @@ function SearchResults() {
                             <SearchBox
                                 translations={{ placeholder: 'Search wurkers ... ex. full stack developer, react', submitTitle: `${searchParams}` }}
                                 className='search-box'
-                                searchAsYouType={searchParams ? true : false}
                                 onSubmit={event => {
                                     event.preventDefault();
                                     setSearch(event.target[0].value);
-                                    navigate(`/search-results/${event.target[0].value ? event.target[0].value : "*"}`)
                                 }}
                             />
                         </div>

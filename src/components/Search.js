@@ -4,15 +4,20 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchParams} from '../redux/slices/search';
+
 function Search() {
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
-
+    const dispatch = useDispatch();
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        navigate(`/search-results/${search ? search : "*"}`)
+        dispatch(setSearchParams(search))
+        navigate('/search-results')
     }
 
     return (

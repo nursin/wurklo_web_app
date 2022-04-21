@@ -5,7 +5,7 @@ import { faGoogle, faApple, faMicrosoft, faYahoo, faGithub } from "@fortawesome/
 import logo from '../images/VectorEPS_ByTailorBrands2.svg'
 import { auth, googleAuthProvider, appleAuthProvider, microsoftAuthProvider, yahooAuthProvider, githubAuthProvider } from '../firebase';
 
-// redux shit
+// redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setUserOrCreateAndSet } from '../redux/slices/user';
 
