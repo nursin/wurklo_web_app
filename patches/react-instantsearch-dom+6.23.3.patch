@@ -1,0 +1,14 @@
+diff --git a/node_modules/react-instantsearch-dom/dist/cjs/components/SearchBox.js b/node_modules/react-instantsearch-dom/dist/cjs/components/SearchBox.js
+index e8a9c37..29b5321 100644
+--- a/node_modules/react-instantsearch-dom/dist/cjs/components/SearchBox.js
++++ b/node_modules/react-instantsearch-dom/dist/cjs/components/SearchBox.js
+@@ -331,7 +331,7 @@ var SearchBox = /*#__PURE__*/function (_Component) {
+ var _default = (0, _reactInstantsearchCore.translatable)({
+   resetTitle: 'Clear the search query.',
+   submitTitle: 'Submit your search query.',
+-  placeholder: 'Search here…'
++  placeholder: 'Search wurkers ... ex. full stack developer, react'
+ })(SearchBox);
+ 
+ exports.default = _default;
+\ No newline at end of file

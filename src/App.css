@@ -1,0 +1,776 @@
+@import url('https://fonts.googleapis.com/css?family=ABeeZee:400,700');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'ABeeZee', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  /* background: rgb(238, 234, 234); */
+  /* background: rgb(240, 240, 240); */
+  /* background-image: url("./images/bgbgbg.webp"); */
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, #000000 30%, #1b5baf 80%);
+  background-attachment: fixed;
+}
+
+a:hover {
+  color: #43cce4;
+  cursor: pointer !important;
+}
+a:link {
+  text-decoration: none;
+  margin-right: 20px;
+}
+.shadowed {
+  -webkit-filter: drop-shadow( 3px 5px 4px rgba(0, 0, 0, .3));
+  filter: drop-shadow( 3px 5px 4px rgba(0, 0, 0, .3));
+  /* Similar syntax to box-shadow */
+}
+.modal-content {
+  border-radius: 2rem;
+}
+.make-round {
+  border-radius: 2rem !important;
+}
+.wurklo__textColor {
+  color: #e0e1dd;
+}
+
+
+.search-box input {
+  padding: 1rem 2rem 1rem 2rem;
+  margin-left: 1rem;
+  border-radius: 10rem;
+  width: 35em;
+  border: none;
+}
+.searchResults__sortBox {
+  position: absolute;
+  top: .7rem;
+  right: 32rem;
+}
+.ais-Stats {
+  padding: 1rem;
+  margin-left: 1rem;
+  color: #e0e1dd;
+}
+.ais-Hits {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  padding: 1rem;
+  margin-left: 1rem;
+  color: #e0e1dd;
+}
+.ais-SortBy-select {
+  border-radius: 10rem;
+  margin-bottom: 0.3rem;
+  padding: 0.1rem;
+}
+.ais-RefinementList-labelText {
+  margin-left: 1rem;
+  color: #e0e1dd;
+}
+
+
+/* note: styles target reactstrap elements */
+/* Landing page */
+.landingPage__logo {
+  width: 12rem;
+}
+.landingPage__logoText {
+  /* text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); */
+  color: #e0e1dd;
+  /* color: white; */
+  font-weight: 600;
+  font-size: 6rem !important;
+}
+.landingPage__sloganText {
+  /* text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); */
+  color: #e0e1dd;
+  /* color: white; */
+  font-weight: 100;
+  font-size: 1.5rem !important;
+  margin-top: -2rem;
+}
+
+/* header */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__notHome {
+    background-color: #000000;
+}
+.header__left {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+.header__right {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+.header__right > img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10rem;
+  border: 2px solid #e0e1dd;
+  cursor: pointer;
+}
+.header__right > p {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10rem;
+  border: 2px solid #e0e1dd;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #6c757d;
+  margin: auto;
+}
+img.navbar-coin {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+}
+.header__logoText {
+  /* text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); */
+  color: #e0e1dd;
+  font-weight: 600;
+}
+.header__joinNowButton:hover {
+  background-color: transparent;
+  color: #0d6efd;
+  transition: 0.5s;
+}
+.header__joinNowButton {
+  background-color: transparent;
+  color: #e0e1dd;
+}
+.header__searchContainer {
+  position: relative;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidebar a, button {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  border: none;
+  background-color: white;
+}
+.sidebar a:hover, button:hover {
+  color: #f1f1f1;
+  transition: 0.5s;
+}
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+.openbtn:hover {
+  background-color: #444;
+  transition: 0.5s;
+}
+
+/* search wurkers page */
+.search {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.search__input {
+  border-radius: 10rem;
+  padding: .8rem;
+}
+.search__inputContainer {
+  position: relative;
+  width: 35rem;
+}
+.search__inputContainerHome {
+  position: relative;
+  width: 35rem;
+}
+.search__searchIcon {
+  position: absolute;
+  top: .8rem;
+  left: 1rem;
+}
+.search__button {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  color: gray;
+  top: .1rem;
+  right: .1rem;
+}
+
+/* Search Results */
+.wurkerCard {
+  width: 18rem;
+  height: 18rem;
+  position: relative;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: 3ms transform ease-out;
+  transition: 0.5s;
+}
+.wurkerCard:hover {
+  transition: 3ms transform ease-in;
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+.wurkerCard > img {
+  width: 18rem;
+  height: 18rem;
+  object-fit: cover;
+  overflow: hidden;  
+  border-radius: 1rem;
+}
+.wurkerCard__wurkerInfo {
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+}
+.wurkerCard__text {
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+}
+.searchResults__searchInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* profile */
+.profile__messageInput {
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border: 0;
+}
+.profile__messageBox {
+  height: 60vh;
+  border: 1px solid lightgray;
+  border: 0;
+  margin-top: -3px;
+  border-bottom-left-radius: 2rem !important;
+  border-bottom-right-radius: 2rem !important;
+  overflow-y: scroll;
+}
+.profile__backButton {
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #e0e1dd;
+}
+.profile__hireButton:hover {
+  background-color: #dc3545 !important;
+  transition: 0.5s;
+}
+.profile__completeButton:hover {
+  background-color: #0d6efd !important;
+  transition: 0.5s;
+}
+.profile__backButton:hover {
+  color: white;
+  transition: 0.5s;
+}
+.profileInfo__image > img {
+  width: 18rem;
+  height: 18rem;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+.profileInfo__image {
+  position: relative;
+}
+.profileInfo__imageFilePicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18rem;
+  height: 18rem;
+  cursor: pointer;
+  border-radius: 2rem;
+  opacity: 0;
+}
+.profileInfo__imageOpacity:hover {
+  opacity: 50%;
+  transition: 0.5s;
+}
+.profileInfo__info {
+  border-radius: 2rem;
+}
+.profileInfo__info p {
+  margin: 3px;
+}
+.profileInfo__performanceEval {
+  border-radius: 2rem;
+}
+.profileInfo__imageContainer > img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 1rem;
+}
+.chatBox {
+  position: relative;
+}
+.chatBox__button {
+  position: absolute;
+  top: 1.3rem;
+  right: 1rem;
+  border-top-right-radius: 2rem;
+}
+.chatBox__button:hover {
+  color: #f1f1f1;
+  transition: 0.3s;
+}
+.message__isUser {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  width: fit-content;
+  max-width: 40vw;
+}
+.message__isNotUser {
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+  width: fit-content;
+  max-width: 40vw;
+}
+.message__time {
+  font-size: .7rem;
+}
+.profile__chatboxSigninMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e0e1dd;
+  font-size: 2rem;
+  height: 10rem;
+}
+.profile__notContact {
+  color: #e0e1dd;
+  font-size: 2rem !important;
+}
+.profile__notContact:hover {
+  color: white;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.profile__isContact {
+  color: #6db6ff;
+  font-size: 2rem !important;
+}
+.profile__isContact:hover {
+  color: #80c0ff;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+/* Messages */
+.messageCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: 3ms transform ease-out;
+  transition: 0.5s;
+}
+.messageCard:hover {
+  transition: 5ms transform ease-in;
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+.messageCard > img {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  overflow: hidden;  
+  border-radius: 1rem;
+}
+.messageCard__info {
+  width: 80%;
+}
+.message__senderImage {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10rem;
+}
+
+/* create wurker */
+.createWurker {
+  background-color: rgb(240, 240, 240);
+}
+.createWurker__button {
+  border-radius: 2rem;
+  color: #e0e1dd;
+  border-color: #e0e1dd;
+}
+.createWurker__button:hover {
+  background-color: transparent !important;
+  color: white;
+  border-color: white;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.createWurker__nameInput {
+  width: 20rem;
+}
+
+/* filter search results  */
+.filterSearchResults__searchFilterIcon {
+  position: absolute;
+  top: 0.9rem;
+  left: -1.5rem;
+  color: #e0e1dd;
+}
+.filterSearchResults__searchFilterIcon:hover {
+  color: #ffffff !important;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+/* Login Modal */
+.yahooSignin__button {
+  color: #430297 !important;
+  border: 1px solid #430297;
+}
+.yahooSignin__button:hover {
+  background-color: #430297 !important;
+  color: white !important;
+  border: 1px solid #430297;
+  transition: 0.5s;
+}
+.loginModal__wurkloLogo {
+  width: 6rem;
+  height: 6rem;
+}
+.loginModal__logoText {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #727374;
+}
+.loginModal__button {
+  color: #e0e1dd;
+  border-color: #e0e1dd;
+}
+.loginModal__button:hover {
+  color: white;
+  border-color: white;
+  background-color: transparent;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+/* join now modal */
+.joinNow__button:hover {
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.joinNow__button {
+  color: #e0e1dd;
+}
+
+/* my account */
+.myAccount__titleText {
+  color: #e0e1dd;
+}
+
+/* footer component */
+footer {
+  background-image: linear-gradient(to top, #3f4548 85%, #1b5baf 99%);
+}
+.fa-fw {
+  color: #e0e1dd;
+}
+
+.facebook:hover {
+  color: #4267B2;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.twitter:hover {
+  color: #1DA1F2;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.telegram:hover {
+  color: #0088CC;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.reddit:hover {
+  color: #FF4500;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.instagram:hover {
+  color: #F77737;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.discord:hover {
+  color: #5865F2;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.youtube:hover {
+  color: #FF0000;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+.tiktok:hover {
+  color: #EE1D52;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+.medium:hover {
+  color: #000000;
+  transition: 300ms transform ease-in;
+  transform: scale(1.10);
+  cursor: pointer;
+}
+
+/* media queries */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .landingPage__logo {
+    width: 8rem;
+  }
+  .landingPage__logoText {
+    /* text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); */
+    font-weight: 600;
+    font-size: 4rem !important;
+  }
+  .search__inputContainer {
+    position: relative;
+    width: 20rem;
+  }
+  .search__inputContainerHome {
+    position: relative;
+    width: 20rem;
+  }
+  .search {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .messageCard__info {
+    width: 70%;
+  }
+  .wurkerCard {
+    width: 22rem;
+    height: 22rem;
+    position: relative;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+  .wurkerCard > img {
+    width: 22rem;
+    height: 22rem;
+    object-fit: cover;
+    overflow: hidden;  
+    border-radius: 1rem;
+  }
+  .wurkerCard:hover {
+    transition: none;
+    transform: none;
+  }
+  .messageCard:hover {
+    transition: none;
+    transform: none;
+  }
+  .profileInfo__image > img {
+    width: 22rem;
+    height: 22rem;
+  }
+  .profileInfo__performanceEval {
+    border-radius: 2rem;
+    width: 22rem;
+  }
+  .profileInfo__info {
+    border-radius: 2rem;
+    width: 22rem;
+  }
+  .message__isUser {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    width: fit-content;
+    max-width: 60vw;
+  }
+  .message__isNotUser {
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+    width: fit-content;
+    max-width: 60vw;
+  }
+  .loginModal__logoText {
+    font-size: 3rem;
+  }
+  .profile__chatboxSigninMessage {
+    font-size: 1.5rem;
+    height: 10rem;
+  }
+  .landingPage__sloganText {
+    /* text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); */
+    color: #e0e1dd;
+    /* color: white; */
+    font-weight: 100;
+    font-size: 1.15rem !important;
+    margin-top: -1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .search-box input {
+    width: 5rem;
+  }
+  .searchResults__sortBox {
+    position: absolute;
+    top: .7rem;
+    right: 6rem;
+  }
+}
+
+@media screen and (min-width: 771px) and (max-width: 1200px) {
+}
+
+@media screen and (min-width: 577px) and (max-width: 770px) {
+  .search__inputContainer {
+    position: relative;
+    width: 20rem;
+  }
+}
+
+@media screen and (max-width: 577px) {
+  .search__inputContainer {
+    position: relative;
+    width: 10rem;
+  }
+  .header__logoText {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .search__inputContainer {
+    position: relative;
+    width: 5rem;
+  }
+  .search__inputContainerHome {
+    position: relative;
+    width: 15rem;
+  }
+  .wurkerCard > img {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+    overflow: hidden;  
+    border-radius: 1rem;
+  }
+  .wurkerCard {
+    width: 15rem;
+    height: 15rem;
+    position: relative;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+  .profileInfo__image > img {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+  .profileInfo__info {
+    border-radius: 2rem;
+    width: 15rem;
+  }
+  .profileInfo__performanceEval {
+    border-radius: 2rem;
+    width: 15rem;
+  }
+  .profileInfo__imageContainer > img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+  }
+  .profile__chatboxSigninMessage {
+    font-size: 1.2rem;
+    height: 10rem;
+  }
+  .header__logoText {
+    display: none;
+  }
+  .search-box input {
+    width: 5rem;
+  }
+  .searchResults__sortBox {
+    position: absolute;
+    top: .7rem;
+    right: 10rem;
+  }
+}
