@@ -77,6 +77,7 @@ function Header() {
                 <Link to="/my-account/">My Account</Link>
                 <Link to="/messages">Messages</Link>
                 <Link to="/contacts">Contacts</Link>
+                <Link to="/contacts">Hired</Link>
                 {user ? <a href="/" onClick={signOut}>Sign out</a> : <a href="/">Sign in</a>}
             </div>
         </div>

@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e126d881.css",
+    "main.js": "/static/js/main.d6532edc.js",
+    "static/js/787.60897f07.chunk.js": "/static/js/787.60897f07.chunk.js",
+    "index.html": "/index.html",
+    "static/media/VectorEPS_ByTailorBrands2.svg": "/static/media/VectorEPS_ByTailorBrands2.f400314c741006fd70d2d0b94a22dca3.svg",
+    "static/media/wurklo-logo-e0e1dd.svg": "/static/media/wurklo-logo-e0e1dd.94137be6b0635ffe18c08ff4eff78bd2.svg",
+    "main.e126d881.css.map": "/static/css/main.e126d881.css.map",
+    "main.d6532edc.js.map": "/static/js/main.d6532edc.js.map",
+    "787.60897f07.chunk.js.map": "/static/js/787.60897f07.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e126d881.css",
+    "static/js/main.d6532edc.js"
+  ]
+}

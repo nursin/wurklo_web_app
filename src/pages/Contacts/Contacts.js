@@ -10,99 +10,101 @@ const wurker = {
 function Contacts() {
   return (
     <Container fluid>
-      {/* <Row>
-        <Col className='searchResults__searchInput'>
-          <Search placeholderValue="Search contacts ..."/>
+      <Row>
+        <Col>
+          <h1 className='wurklo__textColor mb-0 text-center'>Contacts</h1>
         </Col>
-      </Row> */}
+      </Row>
       <Row className='m-5 mb-5'>
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
         <WurkerCard
           id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
-        />
-        <WurkerCard
-          id={'rEdrSQcQCVNTT9RQTpN2uODtj7Y2'}
-          wurker={wurker}
+          displayName={wurker.displayName}
+          skill={wurker.skill}
+          photoURL={wurker.photoURL}
         />
       </Row>
     </Container>

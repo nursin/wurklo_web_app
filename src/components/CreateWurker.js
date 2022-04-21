@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 //redux 
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../redux/slices/user';
-import JoinNowModal from './JoinNowModal';
 
 function CreateWurker() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,18 +65,18 @@ function CreateWurker() {
                             .set({
                                 created: firebase.firestore.FieldValue.serverTimestamp(),
                                 authUid: user.uid,
-                                displayName: name.toLowerCase(),
+                                display_name: name.toLowerCase(),
                                 email: email.toLowerCase(),
                                 skill: skill.toLowerCase(),
                                 rate: rate.toLowerCase(),
-                                yearsOfExp: yearsOfExp.toLowerCase(),
-                                highestEdu: highestEdu.toLowerCase(),
-                                certsLicenses: certsLicenses.toLowerCase(),
+                                years_of_exp: yearsOfExp.toLowerCase(),
+                                highest_edu: highestEdu.toLowerCase(),
+                                certs_licenses: certsLicenses.toLowerCase(),
                                 availability: availability.toLowerCase(),
                                 phone: phone.toLowerCase(),
-                                portfolioLink: portfolioLink.toLowerCase(),
+                                portfolio_link: portfolioLink.toLowerCase(),
                                 references: references.toLowerCase(),
-                                photoURL: url,
+                                photo_url: url,
                                 tags: tags
                             },
                                 {
@@ -134,7 +132,7 @@ function CreateWurker() {
                     <h3 className='text-secondary m-0'><strong>Create Wurker Profile</strong></h3>
                 </ModalHeader>
                 <ModalBody className='createWurker pt-0'>
-                    <p className='text-danger'>This information will be public to everyone. Leave blank any fields you want to remain private.</p>
+                    <p className='text-danger mb-0 mt-2 text-center'>This information will be public to everyone. Leave blank any fields you want to remain private.</p>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
                             <Input

@@ -13,10 +13,10 @@ export const createUser = createAsyncThunk(
                 .doc(user.uid)
                 .set({
                     created: firebase.firestore.FieldValue.serverTimestamp(),
-                    authUid: user.uid,
-                    displayName: user.displayName.toLowerCase(),
+                    auth_uid: user.uid,
+                    display_name: user.displayName.toLowerCase(),
                     email: user.email.toLowerCase(),
-                    photoURL: user.photoURL
+                    photo_url: user.photoURL
                 },
                     {
                         merge: true
@@ -50,10 +50,10 @@ export const setUserOrCreateAndSet = createAsyncThunk(
                             .doc(user.uid)
                             .set({
                                 created: firebase.firestore.FieldValue.serverTimestamp(),
-                                authUid: user.uid,
-                                displayName: user.displayName.toLowerCase(),
+                                auth_uid: user.uid,
+                                display_name: user.displayName.toLowerCase(),
                                 email: user.email.toLowerCase(),
-                                photoURL: user.photoURL
+                                photo_url: user.photoURL
                             },
                                 {
                                     merge: true

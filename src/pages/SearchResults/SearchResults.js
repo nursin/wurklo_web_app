@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Row } from 'reactstrap'
-import Search from '../../components/Search'
+import { Col, Container, Row } from 'reactstrap'
 import WurkerCard from '../../components/WurkerCard'
-import { db } from '../../firebase';
 import { useParams } from 'react-router-dom';
-import FilterSearchResults from '../../components/FilterSearchResults';
-import Typesense from 'typesense';
 import { InstantSearch, SearchBox, Hits, Stats } from "react-instantsearch-dom"
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
-import { useLocation, useNavigate } from "react-router-dom";
-import { RefinementList } from 'react-instantsearch-dom';
-import { SortBy } from 'react-instantsearch-dom';
-import { Configure } from 'react-instantsearch-dom';
-import { Pagination } from 'react-instantsearch-dom';
-import { RangeSlider } from 'react-instantsearch-dom';
-import { RangeInput } from 'react-instantsearch-dom';
+import { useNavigate } from "react-router-dom";
+import { SortBy, Pagination, Configure, RefinementList } from 'react-instantsearch-dom';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
 function openNav() {
@@ -26,11 +17,6 @@ function closeNav() {
 }
 
 function SearchResults() {
-    const [wurkers, setWurkers] = useState([]);
-    const [pages, setPages] = useState(0);
-    const [numFound, setNumFound] = useState();
-    const [currPage, setCurrPage] = useState(1);
-    const [perPage, setPerPage] = useState(20);
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
 
@@ -69,26 +55,16 @@ function SearchResults() {
     )
 
     useEffect(() => {
-        console.log(searchParams)
+
     }, [searchParams])
 
     return (
         <Container fluid>
-            <Row>
-                <Col className='text-center'>
-                    {Array(pages + 1).fill(pages, 1).map((_, i) => {
-                        if ((i > 9) && (i < pages - 1)) {
-                            return
-                        }
-                        return <Button key={i} outline className='wurklo__textColor mt-0 p-1 m-1 shadow-none' onClick={() => setCurrPage(i)}>{i}</Button>
-                    })}
-                </Col>
-            </Row>
-            <Row className=''>
+            <Row className='me-0'>
                 <Col md={12}>
                     <InstantSearch searchClient={searchClient} indexName="wurkers">
                         <Configure
-                            hitsPerPage={20}
+                            hitsPerPage={10}
                         />
                         <div className='d-flex searchResults__sortBox'>
                             <FilterListIcon
@@ -111,7 +87,7 @@ function SearchResults() {
                             <Stats />
                             <Hits hitComponent={Hit} />
                         </div>
-                        <div id="searchSidebar" className="sidebarFilter shadow">
+                        <div id="searchSidebar" className="sidebarFilter shadow pb-5">
                             <button className="closebtn" onClick={() => closeNav()}>×</button>
                             <div>
                                 <SortBy
@@ -139,21 +115,21 @@ function SearchResults() {
                                     limit={10}
                                 />
                                 <hr />
-                                <h5>Highest Education</h5>
+                                <h5 className='ms-2'>Highest Education</h5>
                                 <RefinementList
                                     className="ms-2"
                                     attribute="highest_edu"
                                     limit={10}
                                 />
                                 <hr />
-                                <h5>Certs/Licenses</h5>
+                                <h5 className='ms-2'>Certs/Licenses</h5>
                                 <RefinementList
                                     className="ms-2"
                                     attribute="certs_licenses"
                                     limit={10}
                                 />
                                 <hr />
-                                <h5>Availability</h5>
+                                <h5 className='ms-2'>Availability</h5>
                                 <RefinementList
                                     className="ms-2"
                                     attribute="availability"
@@ -161,8 +137,6 @@ function SearchResults() {
                                 />
                             </div>
                         </div>
-
-
                     </InstantSearch>
                 </Col>
             </Row>

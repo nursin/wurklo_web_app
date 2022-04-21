@@ -1,7 +1,7 @@
 import { ChatSharp } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import MessageCard from '../../components/MessageCard';
 import { db } from '../../firebase';
 
@@ -26,6 +26,11 @@ function Messages() {
 
     return (
         <Container >
+            <Row>
+                <Col>
+                    <h1 className='wurklo__textColor text-center'>Messages</h1>
+                </Col>
+            </Row>
             <Row className='mx-1'>
                 {
                     chats?.map((chat) => (

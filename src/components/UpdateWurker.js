@@ -62,19 +62,19 @@ function UpdateWurker({wurker}) {
                         db.collection("wurkers")
                         .doc(wurker.id)
                         .update({
-                            lastUpdate: firebase.firestore.FieldValue.serverTimestamp(),
-                            displayName: name.toLowerCase(),
+                            last_update: firebase.firestore.FieldValue.serverTimestamp(),
+                            display_name: name.toLowerCase(),
                             email: email.toLowerCase(),
                             skill: skill.toLowerCase(),
                             rate: rate.toLowerCase(),
-                            yearsOfExp: yearsOfExp.toLowerCase(),
-                            highestEdu: highestEdu.toLowerCase(),
-                            certsLicenses: certsLicenses.toLowerCase(),
+                            years_of_exp: yearsOfExp.toLowerCase(),
+                            highest_edu: highestEdu.toLowerCase(),
+                            certs_licenses: certsLicenses.toLowerCase(),
                             availability: availability.toLowerCase(),
                             phone: phone.toLowerCase(),
-                            portfolioLink: portfolioLink.toLowerCase(),
+                            portfolio_link: portfolioLink.toLowerCase(),
                             references: references.toLowerCase(),
-                            photoURL: url,
+                            photo_url: url,
                             tags: tags
                         });
                         setProgress(0);

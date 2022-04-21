@@ -52,11 +52,11 @@ function UpdateUser() {
                             .collection("users")
                             .doc(user.uid)
                             .set({
-                                lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
-                                displayName: name.toLowerCase(),
+                                last_updated: firebase.firestore.FieldValue.serverTimestamp(),
+                                display_name: name.toLowerCase(),
                                 email: email.toLowerCase(),
                                 phone: phone.toLowerCase(),
-                                photoURL: url
+                                photo_url: url
                             },
                                 {
                                     merge: true

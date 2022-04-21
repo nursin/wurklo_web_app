@@ -64,8 +64,8 @@ a:link {
   margin-left: 1rem;
   color: #e0e1dd;
 }
-.ais-Hits-list {
-
+.ais-RefinementList-count {
+  color: #0d6efd;
 }
 .ais-SortBy-select {
   border-radius: 10rem;
@@ -663,15 +663,15 @@ footer {
     width: 70%;
   }
   .wurkerCard {
-    width: 22rem;
-    height: 22rem;
+    width: 20rem;
+    height: 20rem;
     position: relative;
     border-radius: 1rem;
     cursor: pointer;
   }
   .wurkerCard > img {
-    width: 22rem;
-    height: 22rem;
+    width: 20rem;
+    height: 20rem;
     object-fit: cover;
     overflow: hidden;  
     border-radius: 1rem;
