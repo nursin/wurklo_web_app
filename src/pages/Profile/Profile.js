@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'reactstrap'
-import ChatBox from '../../components/ChatBox';
 import ProfileInfo from '../../components/ProfileInfo';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
@@ -12,31 +11,29 @@ import StarIcon from '@mui/icons-material/Star';
 
 //redux 
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, saveContact, removeContact } from '../../redux/slices/user';
+import { saveContact, removeContact } from '../../redux/slices/user';
 
 function Profile() {
     let { id } = useParams();
     const [wurkerProfile, setWurkerProfile] = useState({});
     const [loggedInProfile, setLoggedInUser] = useState();
     const [hire, setHire] = useState(false);
-    const navigate = useNavigate();
+    const [contact, setContact] = useState(false);
 
-    const contact = loggedInProfile?.contacts?.find((id) => wurkerProfile?.authUid)
+    const navigate = useNavigate();
     // redux
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
         db.collection('wurkers').doc(id).onSnapshot(doc => {
-            setWurkerProfile(
-                doc.data()
-            );
+            setWurkerProfile(doc.data());
         })
         db.collection('users').doc(user?.uid).onSnapshot(doc => {
-            setLoggedInUser(doc.data())
+            setLoggedInUser(doc.data());
+            setContact(doc.data()?.contacts?.findIndex(obj => obj === id) >= 0);
         })
         window.scrollTo(0, 0)
-        // dispatch(saveContact(user))
     }, [user]);
 
     const createChat = () => {
@@ -55,10 +52,10 @@ function Profile() {
     }
 
     const isContact = () => {
-        if (loggedInProfile?.contacts?.find(id => wurkerProfile?.authUid)) {
-            dispatch(removeContact({user, id}))
+        if (loggedInProfile.contacts.findIndex(obj => obj === id) >= 0) {
+            dispatch(removeContact({ user, id }))
         } else {
-            dispatch(saveContact({user, id}))
+            dispatch(saveContact({ user, id }))
         }
     }
 
@@ -74,8 +71,8 @@ function Profile() {
                     :
                     <Button color='danger' outline className='profile__hireButton make-round bg-white' onClick={() => setHire(true)}>Hire</Button>
                 }
-                {contact ? <StarIcon className='profile__isContact mt-1 mt-md-2' onClick={isContact} /> :
-                    <StarBorderIcon className='profile__notContact mt-1 mt-md-2' onClick={isContact} />
+                {contact ? <StarIcon className='profile__isContact mt-1 mt-md-2' onClick={isContact}/> :
+                    <StarBorderIcon className='profile__notContact mt-1 mt-md-2' onClick={isContact}/>
                 }
             </div>
             <Row className='mt-3'>

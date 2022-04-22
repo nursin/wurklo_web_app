@@ -67,11 +67,10 @@ export const setUserOrCreateAndSet = createAsyncThunk(
     }
 )
 
-// create user profile from authenticated user signup
+// save contact to logged in user profile
 export const saveContact = createAsyncThunk(
     "user/saveContact",
     async ({user, id}) => {
-        // console.log("user", user.uid, id)
         try {
             // post new user profile in db
             db
@@ -90,11 +89,10 @@ export const saveContact = createAsyncThunk(
     }
 )
 
-// create user profile from authenticated user signup
+// remove contact to logged in user profile
 export const removeContact = createAsyncThunk(
     "user/removeContact",
     async ({user, id}) => {
-        // console.log("user", user.uid, id)
         try {
             // post new user profile in db
             db
@@ -113,11 +111,35 @@ export const removeContact = createAsyncThunk(
     }
 )
 
+// get logged in user contacts
+export const getContacts = createAsyncThunk(
+    "user/getContacts",
+    async ({user}) => {
+        try {
+            // post new user profile in db
+            db
+                .collection("users")
+                .doc(user.uid)
+                .update({
+                    contacts: firebase.firestore.FieldValue.arrayRemove(id)
+                },
+                    {
+                        merge: true
+                    }
+                )
+        } catch (err) {
+            console.log("Get contacts failed due to: ", err)
+        }
+    }
+)
+
+
 // change the state based on the called function
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
         user: null,
+        userContacts: null,
         status: null,
     },
     reducers: {
@@ -135,12 +157,6 @@ export const userSlice = createSlice({
             })
             .addCase(createUser, (state) => {
                 state.status = "failed";
-            })
-            .addCase(setUserOrCreateAndSet.fulfilled, (state, action) => {
-                console.log("extra reducer user: ", action.payload)
-            })
-            .addCase(saveContact.fulfilled, (state, action) => {
-                console.log("extra")
             })
     }
 })
