@@ -19,6 +19,7 @@ function Profile() {
     const [loggedInProfile, setLoggedInUser] = useState();
     const [hire, setHire] = useState(false);
     const [contact, setContact] = useState(false);
+    const [contacts, setContacts] = useState();
 
     const navigate = useNavigate();
     // redux
@@ -31,9 +32,18 @@ function Profile() {
         })
         db.collection('users').doc(user?.uid).onSnapshot(doc => {
             setLoggedInUser(doc.data());
-            setContact(doc.data()?.contacts?.findIndex(obj => obj === id) >= 0);
+            // setContact(doc.data()?.contacts?.findIndex(obj => obj === id) >= 0);
         })
         window.scrollTo(0, 0)
+        db.collection('contacts').doc(user?.uid).collection('contact').onSnapshot(collections => {
+          setContacts(collections.docs.map(doc => (
+            doc.id
+          )));
+          const contactArray = collections.docs.map(doc => (
+            doc.id
+          ))
+          setContact(contactArray?.findIndex(obj => obj === id) >= 0);
+        })
     }, [user]);
 
     const createChat = () => {
@@ -52,10 +62,10 @@ function Profile() {
     }
 
     const isContact = () => {
-        if (loggedInProfile.contacts.findIndex(obj => obj === id) >= 0) {
+        if (contacts.findIndex(obj => obj === id) >= 0) {
             dispatch(removeContact({ user, id }))
         } else {
-            dispatch(saveContact({ user, id }))
+            dispatch(saveContact({ wurkerProfile, user, id }))
         }
     }
 

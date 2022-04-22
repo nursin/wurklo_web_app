@@ -6,6 +6,7 @@ function WurkerCard({ id, displayName, skill, photoURL }) {
     const navigate = useNavigate();
 
     const openProfile = () => {
+        console.log(id)
         navigate(`/profile/${id}`)
     }
 

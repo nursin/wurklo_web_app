@@ -70,19 +70,21 @@ export const setUserOrCreateAndSet = createAsyncThunk(
 // save contact to logged in user profile
 export const saveContact = createAsyncThunk(
     "user/saveContact",
-    async ({user, id}) => {
+    async ({ wurkerProfile, user, id }) => {
         try {
             // post new user profile in db
             db
-                .collection("users")
+                .collection("contacts")
                 .doc(user.uid)
-                .update({
-                    contacts: firebase.firestore.FieldValue.arrayUnion(id)
-                },
-                    {
-                        merge: true
-                    }
-                )
+                .collection("contact")
+                .doc(id)
+                .set({
+                    created: firebase.firestore.FieldValue.serverTimestamp(),
+                    display_name: wurkerProfile.display_name,
+                    skill: wurkerProfile.skill,
+                    wurker_id: id,
+                    photo_url: wurkerProfile.photoURL
+                })
         } catch (err) {
             console.log("Save contact failed due to: ", err)
         }
@@ -92,19 +94,18 @@ export const saveContact = createAsyncThunk(
 // remove contact to logged in user profile
 export const removeContact = createAsyncThunk(
     "user/removeContact",
-    async ({user, id}) => {
+    async ({ user, id }) => {
         try {
             // post new user profile in db
             db
-                .collection("users")
+                .collection("contacts")
                 .doc(user.uid)
-                .update({
-                    contacts: firebase.firestore.FieldValue.arrayRemove(id)
-                },
-                    {
-                        merge: true
-                    }
-                )
+                .collection("contact")
+                .doc(id)
+                .delete()
+                .then(() => {
+                    console.log("Contact deleted")
+                })
         } catch (err) {
             console.log("Remove contact failed due to: ", err)
         }
@@ -114,19 +115,14 @@ export const removeContact = createAsyncThunk(
 // get logged in user contacts
 export const getContacts = createAsyncThunk(
     "user/getContacts",
-    async ({user}) => {
+    async ({ user }) => {
         try {
             // post new user profile in db
             db
-                .collection("users")
-                .doc(user.uid)
-                .update({
-                    contacts: firebase.firestore.FieldValue.arrayRemove(id)
-                },
-                    {
-                        merge: true
-                    }
-                )
+            .collection('contacts')
+            .doc(user?.uid)
+            .collection('contact')
+
         } catch (err) {
             console.log("Get contacts failed due to: ", err)
         }
