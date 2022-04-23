@@ -128,6 +128,13 @@ function SearchResults() {
                                     attribute="availability"
                                     limit={10}
                                 />
+                                <hr />
+                                <h5 className='ms-2'>Zip Code</h5>
+                                <RefinementList
+                                    className="ms-2"
+                                    attribute="zip_code"
+                                    limit={10}
+                                />
                             </div>
                         </div>
                     </InstantSearch>
