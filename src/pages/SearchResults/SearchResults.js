@@ -157,6 +157,7 @@ function SearchResults() {
                                         </option>
                                     </Input>
                                 </div>
+                                <p className='text-center'>{latitude}, {longitude}</p>
                                 <h5 className='ms-2'>Skill</h5>
                                 <RefinementList
                                     className="ms-2"

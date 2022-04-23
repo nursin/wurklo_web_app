@@ -8,10 +8,13 @@ import generateId from '../../lib/generateId';
 import firebase from 'firebase'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import { FacebookShareButton } from 'react-share';
+import { FacebookIcon } from 'react-share';
 
 //redux 
 import { useDispatch, useSelector } from 'react-redux';
 import { saveContact, removeContact } from '../../redux/slices/user';
+import ShareModal from '../../components/ShareModal';
 
 function Profile() {
     let { id } = useParams();
@@ -69,6 +72,8 @@ function Profile() {
         }
     }
 
+    // https://app.wurklo.com/profile/OYNqfROnN0Af6iym9ddH
+
     return (
         <Container className='profile mt-3 text-center text-md-start'>
             <div className='d-flex justify-content-between mb-2 mx-3 mx-sm-2 mx-md-0'>
@@ -81,6 +86,7 @@ function Profile() {
                     :
                     <Button color='danger' outline className='profile__hireButton make-round bg-white' onClick={() => setHire(true)}>Hire</Button>
                 }
+                <ShareModal />
                 {contact ? <StarIcon className='profile__isContact mt-1 mt-md-2' onClick={isContact}/> :
                     <StarBorderIcon className='profile__notContact mt-1 mt-md-2' onClick={isContact}/>
                 }
