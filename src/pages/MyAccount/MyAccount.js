@@ -57,14 +57,14 @@ function MyAccount() {
                     <Row className="mt-4">
                         <h3 className="myAccount__titleText mb-4">Wurker Profile</h3>
                         <ProfileInfo
-                            name={userWurkerProfile?.[0]?.wurker?.displayName}
+                            name={userWurkerProfile?.[0]?.wurker?.display_name}
                             skill={userWurkerProfile?.[0]?.wurker?.skill}
                             rate={userWurkerProfile?.[0]?.wurker?.rate}
-                            imageUrl={userWurkerProfile?.[0]?.wurker?.photoURL}
+                            imageUrl={userWurkerProfile?.[0]?.wurker?.photo_url}
                             availability={userWurkerProfile?.[0]?.wurker?.availability}
                             phone={userWurkerProfile?.[0]?.wurker?.phone}
                             email={userWurkerProfile?.[0]?.wurker?.email}
-                            portfolioLink={userWurkerProfile?.[0]?.wurker?.portfolioLink}
+                            portfolioLink={userWurkerProfile?.[0]?.wurker?.portfolio_link}
                         />
                     </Row>
                     <Row>
