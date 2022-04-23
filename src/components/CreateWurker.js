@@ -298,7 +298,6 @@ function CreateWurker() {
                             <p className='mt-4 mb-0'>Upload Profile Image</p>
                             <Input
                                 className='search__input shadow-none'
-                                placeholder="Portfolio Link ..."
                                 onChange={handleChange}
                                 type="file"
                             />

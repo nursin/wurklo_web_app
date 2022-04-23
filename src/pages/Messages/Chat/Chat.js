@@ -38,8 +38,6 @@ function Chat() {
     }, [location?.state.chatDetails, db])
 
     const handleSendMessage = (e) => {
-        console.log('user', user)
-        console.log('senderDetailsa', location?.state.chatDetails?.users[user?.uid])
         const display_name = user.displayName;
         e.preventDefault();
         db

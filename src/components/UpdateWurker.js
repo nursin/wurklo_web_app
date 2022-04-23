@@ -252,7 +252,10 @@ function UpdateWurker({ wurker }) {
                     </Row>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
-                            <p className='mt-1 mb-0'>Add Geolocation</p>
+                            <div className='d-flex justify-content-center mt-3 my-2'>
+                                <p className='mt-1 mb-0 me-2'>Add Geolocation</p>
+                                <Button className='p-0 px-1' onClick={getPosition}>{loading ? 'Loading ...' : 'Get Location'}</Button>
+                            </div>
                             <div className='d-flex'>
                                 <Input
                                     type='search'
@@ -267,14 +270,11 @@ function UpdateWurker({ wurker }) {
                                     value={latitude}
                                 />
                             </div>
-
-                            <Button onClick={getPosition}>{loading ? 'Loading ...' : 'Get Location'}</Button>
                         </Col>
                         <Col className="text-center mt-0 mx-auto">
-                            <p className='mt-1 mb-0'>Upload Profile Image</p>
+                            <p className='mt-4 mb-0'>Upload Profile Image</p>
                             <Input
                                 className='search__input shadow-none'
-                                placeholder="Portfolio Link ..."
                                 onChange={handleChange}
                                 type="file"
                             />
