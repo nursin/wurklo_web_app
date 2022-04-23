@@ -27,9 +27,7 @@ function UpdateWurker({ wurker }) {
     const [tags, setTags] = useState(`${wurker?.wurker?.tags}`);
     const [zipCode, setZipCode] = useState(`${wurker?.wurker?.zip_code}`);
     const [progress, setProgress] = useState(0);
-
     const [loading, setLoading] = useState(false);
-
 
     // redux
     const { user } = useSelector((state) => state.user);
@@ -78,7 +76,6 @@ function UpdateWurker({ wurker }) {
                                 availability: availability.toLowerCase(),
                                 phone: phone.toLowerCase(),
                                 portfolio_link: portfolioLink.toLowerCase(),
-                                // references: references.toLowerCase(),
                                 photo_url: url,
                                 tags: tags,
                                 zip_code: Number(zipCode),
@@ -112,13 +109,8 @@ function UpdateWurker({ wurker }) {
 
     function success(pos) {
         const crd = pos.coords;
-
-        console.log('Your current position is:');
-        console.log(`Latitude : ${crd.latitude}`);
         setLatitude(crd.latitude)
-        console.log(`Longitude: ${crd.longitude}`);
         setLongitude(crd.longitude)
-        console.log(`More or less ${crd.accuracy} meters.`);
         setGeoPoint([crd.latitude, crd.longitude])
         // setGeoHash(geofire.geohashForLocation([crd.latitude, crd.longitude]))
         setLoading(false)
@@ -134,10 +126,6 @@ function UpdateWurker({ wurker }) {
         setLoading(true)
         navigator.geolocation.getCurrentPosition(success, error, options);
     }
-
-    console.log('geopoint', geoPoint)
-    console.log('latitude', latitude)
-    console.log('longitude', longitude)
 
     return (
         <>
@@ -174,7 +162,6 @@ function UpdateWurker({ wurker }) {
                         </Col>
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Email</p>
-
                             <Input
                                 className='search__input shadow-none'
                                 placeholder="Email ..."

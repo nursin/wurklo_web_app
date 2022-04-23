@@ -88,14 +88,14 @@ function Profile() {
             <Row className='mt-3'>
                 <ProfileInfo
                     profile={true}
-                    name={wurkerProfile.displayName}
+                    name={wurkerProfile.display_name}
                     skill={wurkerProfile.skill}
                     rate={wurkerProfile.rate}
-                    imageUrl={wurkerProfile.photoURL}
+                    imageUrl={wurkerProfile.photo_url}
                     availability={wurkerProfile.availability}
                     phone={wurkerProfile.phone}
                     email={wurkerProfile.email}
-                    portfolioLink={wurkerProfile.portfolioLink}
+                    portfolioLink={wurkerProfile.portfolio_link}
                 />
             </Row>
             <Row className='text-center'>

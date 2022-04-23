@@ -7,9 +7,9 @@ const Message = forwardRef(({ message }, ref) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const isUser = user?.uid === message.senderUid;
+  const isUser = user?.uid === message.sender_uid;
 
-  const photoURL = message?.photoURL;
+  const photoURL = message?.photo_url;
   return (
     <div className={'d-flex ' + (isUser ? 'justify-content-start' : 'justify-content-end')}>
       <div ref={ref} className={'p-2 text-white m-2 ' + (isUser ? 'message__isUser bg-primary shadow-sm' : 'message__isNotUser bg-secondary shadow-sm')}>{message?.message}
@@ -18,7 +18,7 @@ const Message = forwardRef(({ message }, ref) => {
         </div>
       </div>
       {isUser ? null :
-        <img className='message__senderImage me-1 mt-4 mt-md-3' src={photoURL} alt={message?.senderName + " photo"} />
+        <img className='message__senderImage me-1 mt-4 mt-md-3' src={photoURL} alt={message?.sender_name + " photo"} />
       }
     </div>
 

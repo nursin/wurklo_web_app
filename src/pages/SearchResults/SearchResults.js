@@ -49,7 +49,7 @@ function SearchResults() {
             id={hit.id}
             displayName={hit.display_name}
             skill={hit.skill}
-            photoURL={hit.photoURL}
+            photoURL={hit.photo_url}
         />
     )
 

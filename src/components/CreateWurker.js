@@ -20,10 +20,15 @@ function CreateWurker() {
     const [availability, setAvailability] = useState('');
     const [phone, setPhone] = useState('');
     const [portfolioLink, setPortfolioLink] = useState('');
-    const [references, setReferences] = useState('');
+    const [geoPoint, setGeoPoint] = useState([0, 0]);
+    const [longitude, setLongitude] = useState(0);
+    const [latitude, setLatitude] = useState(0);
     const [imageFile, setImageFile] = useState(null);
     const [tags, setTags] = useState(null);
+    const [zipCode, setZipCode] = useState();
     const [progress, setProgress] = useState(0);
+
+    const [loading, setLoading] = useState(false);
 
     // redux
     const { user } = useSelector((state) => state.user);
@@ -68,16 +73,21 @@ function CreateWurker() {
                                 display_name: name.toLowerCase(),
                                 email: email.toLowerCase(),
                                 skill: skill.toLowerCase(),
-                                rate: rate.toLowerCase(),
-                                years_of_exp: yearsOfExp.toLowerCase(),
+                                rate: Number(rate),
+                                years_of_exp: Number(yearsOfExp),
                                 highest_edu: highestEdu.toLowerCase(),
                                 certs_licenses: certsLicenses.toLowerCase(),
                                 availability: availability.toLowerCase(),
                                 phone: phone.toLowerCase(),
                                 portfolio_link: portfolioLink.toLowerCase(),
-                                references: references.toLowerCase(),
                                 photo_url: url,
-                                tags: tags
+                                tags: tags,
+                                zip_code: Number(zipCode),
+                                location_typesense: geoPoint,
+                                location: {
+                                    latitude: latitude,
+                                    longitude: longitude
+                                }
                             },
                                 {
                                     merge: true
@@ -86,14 +96,17 @@ function CreateWurker() {
                         setName('')
                         setEmail('')
                         setSkill('')
-                        setRate('')
-                        setYearsOfExp('')
+                        setRate(0)
+                        setYearsOfExp(0)
                         setHighestEdu('')
                         setCertsLicenses('')
                         setAvailability('')
                         setPhone('')
                         setPortfolioLink('')
-                        setReferences('')
+                        setTags('')
+                        setGeoPoint([0, 0])
+                        setLatitude(0)
+                        setLongitude(0)
                         setImageFile(null)
                         setIsModalOpen(false)
                     })
@@ -108,6 +121,31 @@ function CreateWurker() {
             alert("Sing in to create a wurker")
         }
 
+    }
+
+    // geolocate, low accuracy, get new location
+    const options = {
+        timeout: 10000,
+        maximumAge: 0
+    }
+
+    function success(pos) {
+        const crd = pos.coords;
+        setLatitude(crd.latitude)
+        setLongitude(crd.longitude)
+        setGeoPoint([crd.latitude, crd.longitude])
+        setLoading(false)
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+        setLoading(false)
+        alert('Timed out before getting location, or an error occured')
+    }
+
+    const getPosition = () => {
+        setLoading(true)
+        navigator.geolocation.getCurrentPosition(success, error, options);
     }
 
     return (
@@ -135,16 +173,18 @@ function CreateWurker() {
                     <p className='text-danger mb-0 mt-2 text-center'>This information will be public to everyone. Leave blank any fields you want to remain private.</p>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Name</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Name ..."
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                             />
                         </Col>
-                        <Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Email</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Email ..."
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
@@ -153,16 +193,18 @@ function CreateWurker() {
                     </Row>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Skill</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Skill or service ..."
                                 value={skill}
                                 onChange={e => setSkill(e.target.value)}
                             />
                         </Col>
-                        <Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Rate</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Rate ..."
                                 value={rate}
                                 onChange={e => setRate(e.target.value)}
@@ -171,16 +213,18 @@ function CreateWurker() {
                     </Row>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Years of Experience</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Years of experience ..."
                                 value={yearsOfExp}
                                 onChange={e => setYearsOfExp(e.target.value)}
                             />
                         </Col>
-                        <Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Highest Education</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Highest education ..."
                                 value={highestEdu}
                                 onChange={e => setHighestEdu(e.target.value)}
@@ -189,16 +233,18 @@ function CreateWurker() {
                     </Row>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Certifications/Licenses</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Certifications/Licenses ..."
                                 value={certsLicenses}
                                 onChange={e => setCertsLicenses(e.target.value)}
                             />
                         </Col>
-                        <Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Availability</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Availability ex. 24/7, 8-5pm M-F, etc ..."
                                 value={availability}
                                 onChange={e => setAvailability(e.target.value)}
@@ -207,18 +253,20 @@ function CreateWurker() {
                     </Row>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Phone #</p>
                             <Input
                                 type='phone'
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Phone # ex. +1-555-555-5555 ..."
                                 value={phone}
                                 onChange={e => setPhone(e.target.value)}
                             />
                         </Col>
-                        <Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Portfolio Link</p>
                             <Input
-                                className='search__input shadow-none mt-4'
-                                placeholder="Portfolio Link ..."
+                                className='search__input shadow-none'
+                                placeholder="Portfolio Link ... ex. wurklo.com"
                                 value={portfolioLink}
                                 onChange={e => setPortfolioLink(e.target.value)}
                             />
@@ -226,16 +274,30 @@ function CreateWurker() {
                     </Row>
                     <Row>
                         <Col md={6} className="text-center mt-0 mx-auto">
-                            <Input
-                                className='search__input shadow-none mt-4'
-                                placeholder="References ..."
-                                value={references}
-                                onChange={e => setReferences(e.target.value)}
-                            />
+                            <div className='d-flex justify-content-center mt-3 my-2'>
+                                <p className='mt-1 mb-0 me-2'>Add Geolocation</p>
+                                <Button className='p-0 px-1' onClick={getPosition}>{loading ? 'Loading ...' : 'Get Location'}</Button>
+                            </div>
+                            <div className='d-flex'>
+                                <Input
+                                    type='search'
+                                    className='search__input shadow-none'
+                                    placeholder="Longitude"
+                                    value={longitude}
+                                />
+                                <Input
+                                    type='search'
+                                    className='search__input shadow-none'
+                                    placeholder="Latitude"
+                                    value={latitude}
+                                />
+                            </div>
+
                         </Col>
-                        <Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-4 mb-0'>Upload Profile Image</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Portfolio Link ..."
                                 onChange={handleChange}
                                 type="file"
@@ -243,12 +305,22 @@ function CreateWurker() {
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={12} className="text-center mt-0 mx-auto">
+                        <Col md={6} className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Tags for Search</p>
                             <Input
-                                className='search__input shadow-none mt-4'
+                                className='search__input shadow-none'
                                 placeholder="Tags ... ex. developer, react, ..."
                                 value={tags}
                                 onChange={e => setTags(e.target.value)}
+                            />
+                        </Col>
+                        <Col className="text-center mt-0 mx-auto">
+                            <p className='mt-1 mb-0'>Zip Code</p>
+                            <Input
+                                className='search__input shadow-none'
+                                placeholder="Zipcode"
+                                value={zipCode}
+                                onChange={e => setZipCode(e.target.value)}
                             />
                         </Col>
                     </Row>

@@ -38,16 +38,19 @@ function Chat() {
     }, [location?.state.chatDetails, db])
 
     const handleSendMessage = (e) => {
+        console.log('user', user)
+        console.log('senderDetailsa', location?.state.chatDetails?.users[user?.uid])
+        const display_name = user.displayName;
         e.preventDefault();
         db
             .collection('chats')
             .doc(`${location?.state.chatDetails?.id}`)
             .collection('messages')
             .add({
-                senderUid: user?.uid,
+                sender_uid: user?.uid,
                 message: message,
-                senderName: user?.displayName,
-                photoURL: location?.state.chatDetails?.users[user?.uid]?.photoURL,
+                sender_name: display_name,
+                photo_url: location?.state.chatDetails?.users[user?.uid]?.photo_url,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             })
         setMessage('')
@@ -67,8 +70,8 @@ function Chat() {
                 <Col className='d-flex justify-content-between'>
                     <ArrowBackIcon className='profile__backButton fs-1 mt-2' onClick={() => navigate(-1)} />
                     <div className='d-flex'>
-                        <h3 className='wurklo__textColor mt-2'>{matchedUserInfo?.displayName?.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</h3>
-                        <img className='message__senderImage ms-3' src={matchedUserInfo?.photoURL} />
+                        <h3 className='wurklo__textColor mt-2'>{matchedUserInfo?.display_name?.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</h3>
+                        <img className='message__senderImage ms-3' src={matchedUserInfo?.photo_url} />
                     </div>
                 </Col>
                 <div className='chatBox mt-2'>

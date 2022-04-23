@@ -83,7 +83,7 @@ export const saveContact = createAsyncThunk(
                     display_name: wurkerProfile.display_name,
                     skill: wurkerProfile.skill,
                     wurker_id: id,
-                    photo_url: wurkerProfile.photoURL
+                    photo_url: wurkerProfile.photo_url
                 })
         } catch (err) {
             console.log("Save contact failed due to: ", err)
@@ -104,7 +104,7 @@ export const removeContact = createAsyncThunk(
                 .doc(id)
                 .delete()
                 .then(() => {
-                    console.log("Contact deleted")
+
                 })
         } catch (err) {
             console.log("Remove contact failed due to: ", err)
