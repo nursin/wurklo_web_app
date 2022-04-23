@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'reactstrap'
+import { Button, Col, Container, Input, Row } from 'reactstrap'
 import WurkerCard from '../../components/WurkerCard'
 import { useParams } from 'react-router-dom';
 import { InstantSearch, SearchBox, Hits, Stats } from "react-instantsearch-dom"
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { SortBy, Pagination, Configure, RefinementList } from 'react-instantsearch-dom';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useDispatch, useSelector } from 'react-redux';
+
 
 function openNav() {
     document.getElementById("searchSidebar").style.width = "250px";
@@ -21,6 +22,11 @@ function SearchResults() {
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const { searchParams } = useSelector((state) => state.search);
+    const [longitude, setLongitude] = useState(-85.6699075);
+    const [latitude, setLatitude] = useState(30.220028);
+    const [loading, setLoading] = useState(false);
+    const [radius, setRadius] = useState(100);
+    const [metric, setMetric] = useState('mi');
 
     // Create a Typesense Client using the search-only API key
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -39,6 +45,7 @@ function SearchResults() {
         //  queryBy is required.
         additionalSearchParameters: {
             queryBy: "tags,skill,display_name",
+            filter_by: `location_typesense:(${latitude}, ${longitude}, ${radius} ${metric})`,
         },
     })
 
@@ -52,6 +59,30 @@ function SearchResults() {
             photoURL={hit.photo_url}
         />
     )
+
+    // geolocate, low accuracy, get new location
+    const options = {
+        timeout: 10000,
+        maximumAge: 0
+    }
+
+    function success(pos) {
+        const crd = pos.coords;
+        setLatitude(crd.latitude)
+        setLongitude(crd.longitude)
+        setLoading(false)
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+        setLoading(false)
+        alert('Timed out before getting location, or an error occured')
+    }
+
+    const getPosition = () => {
+        setLoading(true)
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
 
     return (
         <Container fluid>
@@ -83,24 +114,49 @@ function SearchResults() {
                         <div id="searchSidebar" className="sidebarFilter shadow pb-5">
                             <button className="closebtn" onClick={() => closeNav()}>×</button>
                             <div>
-                                <SortBy
-                                    className='text-center'
-                                    defaultRefinement='wurkers'
-                                    items={[
-                                        { label: 'Rate', value: 'rate' },
-                                        { label: 'Low - High', value: 'wurkers/sort/rate:asc' },
-                                        { label: ' High - Low', value: 'wurkers/sort/rate:desc' }
-                                    ]}
-                                />
-                                <SortBy
-                                    className='text-center'
-                                    defaultRefinement='wurkers'
-                                    items={[
-                                        { label: 'Years Exp', value: 'yearsOfExp' },
-                                        { label: 'Low - High', value: 'wurkers/sort/years_of_exp:asc' },
-                                        { label: ' High - Low', value: 'wurkers/sort/years_of_exp:desc' }
-                                    ]}
-                                />
+                                <div className='d-flex justify-content-around'>
+                                    <SortBy
+                                        className='text-center'
+                                        defaultRefinement='wurkers'
+                                        items={[
+                                            { label: 'Rate', value: 'rate' },
+                                            { label: 'Low - High', value: 'wurkers/sort/rate:asc' },
+                                            { label: ' High - Low', value: 'wurkers/sort/rate:desc' }
+                                        ]}
+                                    />
+                                    <SortBy
+                                        className='text-center'
+                                        defaultRefinement='wurkers'
+                                        items={[
+                                            { label: 'Years Exp', value: 'yearsOfExp' },
+                                            { label: 'Low - High', value: 'wurkers/sort/years_of_exp:asc' },
+                                            { label: ' High - Low', value: 'wurkers/sort/years_of_exp:desc' }
+                                        ]}
+                                    />
+                                </div>
+                                <div className='d-flex m-2'>
+                                    <Button className='w-100 p-0 px-1 me-1' onClick={getPosition}>{loading ? 'Loading ...' : 'Near me'}</Button>
+                                    <Input
+                                        className='w-50 me-1'
+                                        placeholder='Radius'
+                                        value={radius}
+                                        onChange={e => setRadius(e.target.value)}
+                                    />
+                                    <Input
+                                        className='w-50'
+                                        type='select'
+                                        placeholder='Metric'
+                                        value={metric}
+                                        onChange={e => setMetric(e.target.value)}
+                                    >
+                                        <option>
+                                            mi
+                                        </option>
+                                        <option>
+                                            km
+                                        </option>
+                                    </Input>
+                                </div>
                                 <h5 className='ms-2'>Skill</h5>
                                 <RefinementList
                                     className="ms-2"
