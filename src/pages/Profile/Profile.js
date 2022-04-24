@@ -72,8 +72,6 @@ function Profile() {
         }
     }
 
-    // https://app.wurklo.com/profile/OYNqfROnN0Af6iym9ddH
-
     return (
         <Container className='profile mt-3 text-center text-md-start'>
             <div className='d-flex justify-content-between mb-2 mx-3 mx-sm-2 mx-md-0'>
@@ -86,7 +84,7 @@ function Profile() {
                     :
                     <Button color='danger' outline className='profile__hireButton make-round bg-white' onClick={() => setHire(true)}>Hire</Button>
                 }
-                <ShareModal />
+                <ShareModal myProfile={false} uid={id}/>
                 {contact ? <StarIcon className='profile__isContact mt-1 mt-md-2' onClick={isContact}/> :
                     <StarBorderIcon className='profile__notContact mt-1 mt-md-2' onClick={isContact}/>
                 }

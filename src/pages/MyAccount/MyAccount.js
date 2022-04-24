@@ -9,6 +9,7 @@ import { db } from '../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../redux/slices/user';
 import UpdateUser from '../../components/UpdateUser'
+import ShareModal from '../../components/ShareModal'
 
 function MyAccount() {
     const { user } = useSelector((state) => state.user);
@@ -68,8 +69,11 @@ function MyAccount() {
                         />
                     </Row>
                     <Row>
-                        <Col md={6} className='mt-4 ms-0 ms-lg-5 mb-4'>
+                        <Col  className='mt-4 ms-0 ms-lg-5 mb-4'>
                             <UpdateWurker wurker={userWurkerProfile?.[0]}/>
+                        </Col>
+                        <Col className='mt-4 ms-0 ms-lg-5 mb-4'>
+                            <ShareModal myProfile={true} uid={user?.uid}/>
                         </Col>
                     </Row>
                 </>
