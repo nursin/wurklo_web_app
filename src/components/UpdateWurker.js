@@ -3,7 +3,7 @@ import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Progres
 import { storage, db } from "../firebase";
 import firebase from 'firebase';
 import { useNavigate } from 'react-router-dom';
-
+import regexPhoneNumber from '../lib/formValidation';
 //redux 
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/slices/user';
@@ -13,17 +13,17 @@ function UpdateWurker({ wurker }) {
     const [name, setName] = useState(`${wurker?.wurker?.display_name}`);
     const [email, setEmail] = useState(`${wurker?.wurker?.email}`);
     const [skill, setSkill] = useState(`${wurker?.wurker?.skill}`);
-    const [rate, setRate] = useState(`${wurker?.wurker?.rate}`);
-    const [yearsOfExp, setYearsOfExp] = useState(`${wurker?.wurker?.years_of_exp}`);
-    const [highestEdu, setHighestEdu] = useState(`${wurker?.wurker?.highest_edu}`);
+    const [rate, setRate] = useState(wurker?.wurker?.rate);
+    const [yearsOfExp, setYearsOfExp] = useState(wurker?.wurker?.years_of_exp);
+    const [highestEdu, setHighestEdu] = useState(wurker?.wurker?.highest_edu);
     const [certsLicenses, setCertsLicenses] = useState(`${wurker?.wurker?.certs_licenses}`);
     const [availability, setAvailability] = useState(`${wurker?.wurker?.availability}`);
     const [phone, setPhone] = useState(`${wurker?.wurker?.phone}`);
     const [portfolioLink, setPortfolioLink] = useState(`${wurker?.wurker?.portfolio_link}`);
-    const [geoPoint, setGeoPoint] = useState([0, 0]);
-    const [longitude, setLongitude] = useState(0);
-    const [latitude, setLatitude] = useState(0);
-    const [imageFile, setImageFile] = useState(`${wurker?.wurker?.photo_url}`);
+    const [geoPoint, setGeoPoint] = useState(wurker?.wurker?.location_typesense);
+    const [longitude, setLongitude] = useState(wurker?.wurker?.location?.longitude);
+    const [latitude, setLatitude] = useState(wurker?.wurker?.location?.latitude);
+    const [imageFile, setImageFile] = useState(null);
     const [tags, setTags] = useState(`${wurker?.wurker?.tags}`);
     const [zipCode, setZipCode] = useState(`${wurker?.wurker?.zip_code}`);
     const [progress, setProgress] = useState(0);
@@ -35,7 +35,13 @@ function UpdateWurker({ wurker }) {
 
     const handleChange = (e) => {
         if (e.target.files[0]) {
-            setImageFile(e.target.files[0])
+            console.log(e.target.files[0].size)
+            if (e.target.files[0].size > 2500000) {
+                alert(`Image file size must be less than 2.5 MB. Your file size is ${(e.target.files[0].size / 1000000).toFixed(2)} MB. Recommend resizing image.`)
+                setImageFile()
+            } else {
+                setImageFile(e.target.files[0])
+            }
         }
     };
 
@@ -127,6 +133,8 @@ function UpdateWurker({ wurker }) {
         navigator.geolocation.getCurrentPosition(success, error, options);
     }
 
+    console.log(wurker)
+
     return (
         <>
             <Button
@@ -163,6 +171,7 @@ function UpdateWurker({ wurker }) {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Email</p>
                             <Input
+                                type='email'
                                 className='search__input shadow-none'
                                 placeholder="Email ..."
                                 value={email}
@@ -183,8 +192,9 @@ function UpdateWurker({ wurker }) {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Rate</p>
                             <Input
+                                type='number'
                                 className='search__input shadow-none'
-                                placeholder="Rate ..."
+                                placeholder="Rate per hour ..."
                                 value={rate}
                                 onChange={e => setRate(e.target.value)}
                             />
@@ -194,6 +204,7 @@ function UpdateWurker({ wurker }) {
                         <Col md={6} className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Years of Experience</p>
                             <Input
+                                type='number'
                                 className='search__input shadow-none'
                                 placeholder="Years of experience ..."
                                 value={yearsOfExp}
@@ -203,11 +214,22 @@ function UpdateWurker({ wurker }) {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Highest Education</p>
                             <Input
+                                type="select"
                                 className='search__input shadow-none'
                                 placeholder="Highest education ..."
                                 value={highestEdu}
                                 onChange={e => setHighestEdu(e.target.value)}
-                            />
+                            >
+                                <option>None</option>
+                                <option>Self Taught</option>
+                                <option>GED</option>
+                                <option>High School</option>
+                                <option>Trade School</option>
+                                <option>Associates Degree</option>
+                                <option>Bachelors Degree</option>
+                                <option>Masters Degree</option>
+                                <option>PHD</option>
+                            </Input>
                         </Col>
                     </Row>
                     <Row>
@@ -234,6 +256,7 @@ function UpdateWurker({ wurker }) {
                         <Col md={6} className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Phone #</p>
                             <Input
+                                type='phone'
                                 className='search__input shadow-none'
                                 placeholder="Phone # ex. +1-555-555-5555 ..."
                                 value={phone}
@@ -258,13 +281,11 @@ function UpdateWurker({ wurker }) {
                             </div>
                             <div className='d-flex'>
                                 <Input
-                                    type='search'
                                     className='search__input shadow-none'
                                     placeholder="Longitude"
                                     value={longitude}
                                 />
                                 <Input
-                                    type='search'
                                     className='search__input shadow-none'
                                     placeholder="Latitude"
                                     value={latitude}
@@ -277,6 +298,7 @@ function UpdateWurker({ wurker }) {
                                 className='search__input shadow-none'
                                 onChange={handleChange}
                                 type="file"
+                                accept='image/jpg,image/jpeg,image/png,image/gif'
                             />
                         </Col>
                     </Row>
@@ -293,6 +315,7 @@ function UpdateWurker({ wurker }) {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Zip Code</p>
                             <Input
+                                type='number'
                                 className='search__input shadow-none'
                                 placeholder="Zipcode"
                                 value={zipCode}
