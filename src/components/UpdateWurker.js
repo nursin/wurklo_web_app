@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Progress, Row } from 'reactstrap';
 import { storage, db } from "../firebase";
 import firebase from 'firebase';
-import { useNavigate } from 'react-router-dom';
-import regexPhoneNumber from '../lib/formValidation';
-//redux 
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/slices/user';
 

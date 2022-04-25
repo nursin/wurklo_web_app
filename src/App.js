@@ -13,6 +13,7 @@ import { auth } from './firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/slices/user';
 import Chat from './pages/Messages/Chat/Chat';
+import WURK from './pages/WURK/WURK';
 
 function App() {
   // redux shit
@@ -43,6 +44,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/wurk" element={<WURK />} />
         </Routes>
       </BrowserRouter>
     </div>

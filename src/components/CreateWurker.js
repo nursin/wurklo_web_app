@@ -13,9 +13,9 @@ function CreateWurker() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [skill, setSkill] = useState('');
-    const [rate, setRate] = useState('');
-    const [yearsOfExp, setYearsOfExp] = useState('');
-    const [highestEdu, setHighestEdu] = useState('');
+    const [rate, setRate] = useState(0);
+    const [yearsOfExp, setYearsOfExp] = useState(0);
+    const [highestEdu, setHighestEdu] = useState('none');
     const [certsLicenses, setCertsLicenses] = useState('');
     const [availability, setAvailability] = useState('');
     const [phone, setPhone] = useState('');
@@ -24,8 +24,8 @@ function CreateWurker() {
     const [longitude, setLongitude] = useState(0);
     const [latitude, setLatitude] = useState(0);
     const [imageFile, setImageFile] = useState(null);
-    const [tags, setTags] = useState(null);
-    const [zipCode, setZipCode] = useState();
+    const [tags, setTags] = useState('');
+    const [zipCode, setZipCode] = useState(0);
     const [progress, setProgress] = useState(0);
 
     const [loading, setLoading] = useState(false);
@@ -37,7 +37,13 @@ function CreateWurker() {
 
     const handleChange = (e) => {
         if (e.target.files[0]) {
-            setImageFile(e.target.files[0])
+            console.log(e.target.files[0].size)
+            if (e.target.files[0].size > 2500000) {
+                alert(`Image file size must be less than 2.5 MB. Your file size is ${(e.target.files[0].size / 1000000).toFixed(2)} MB. Recommend resizing image.`)
+                setImageFile()
+            } else {
+                setImageFile(e.target.files[0])
+            }
         }
     };
 
@@ -184,6 +190,7 @@ function CreateWurker() {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Email</p>
                             <Input
+                                type='email'
                                 className='search__input shadow-none'
                                 placeholder="Email ..."
                                 value={email}
@@ -204,8 +211,9 @@ function CreateWurker() {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Rate</p>
                             <Input
+                                type='number'
                                 className='search__input shadow-none'
-                                placeholder="Rate ..."
+                                placeholder="Rate per hour ..."
                                 value={rate}
                                 onChange={e => setRate(e.target.value)}
                             />
@@ -215,6 +223,7 @@ function CreateWurker() {
                         <Col md={6} className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Years of Experience</p>
                             <Input
+                                type='number'
                                 className='search__input shadow-none'
                                 placeholder="Years of experience ..."
                                 value={yearsOfExp}
@@ -224,11 +233,22 @@ function CreateWurker() {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Highest Education</p>
                             <Input
+                                type="select"
                                 className='search__input shadow-none'
                                 placeholder="Highest education ..."
                                 value={highestEdu}
                                 onChange={e => setHighestEdu(e.target.value)}
-                            />
+                            >
+                                <option>None</option>
+                                <option>Self Taught</option>
+                                <option>GED</option>
+                                <option>High School</option>
+                                <option>Trade School</option>
+                                <option>Associates Degree</option>
+                                <option>Bachelors Degree</option>
+                                <option>Masters Degree</option>
+                                <option>PHD</option>
+                            </Input>
                         </Col>
                     </Row>
                     <Row>
@@ -280,13 +300,11 @@ function CreateWurker() {
                             </div>
                             <div className='d-flex'>
                                 <Input
-                                    type='search'
                                     className='search__input shadow-none'
                                     placeholder="Longitude"
                                     value={longitude}
                                 />
                                 <Input
-                                    type='search'
                                     className='search__input shadow-none'
                                     placeholder="Latitude"
                                     value={latitude}
@@ -300,6 +318,7 @@ function CreateWurker() {
                                 className='search__input shadow-none'
                                 onChange={handleChange}
                                 type="file"
+                                accept='image/jpg,image/jpeg,image/png,image/gif'
                             />
                         </Col>
                     </Row>
@@ -316,6 +335,7 @@ function CreateWurker() {
                         <Col className="text-center mt-0 mx-auto">
                             <p className='mt-1 mb-0'>Zip Code</p>
                             <Input
+                                type='number'
                                 className='search__input shadow-none'
                                 placeholder="Zipcode"
                                 value={zipCode}
