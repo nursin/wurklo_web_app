@@ -43,6 +43,7 @@ function PerformEvalModal({ id }) {
             .doc(user.uid)
             .set({
                 created: firebase.firestore.FieldValue.serverTimestamp(),
+                user_uid: user.uid,
                 communication: Number(communication),
                 reliable: Number(reliable),
                 team_player: Number(teamPlayer),

@@ -80,7 +80,7 @@ function LoginModal() {
                         Sign in with Google
                         <FontAwesomeIcon icon={faGoogle} className="fs-5 ms-2" />
                     </Button>
-                    <Button
+                    {/* <Button
                         outline
                         color='secondary'
                         className='appleSignin__button make-round shadow-none p-2 px-4 mt-3'
@@ -97,7 +97,7 @@ function LoginModal() {
                     >
                         Sign in with Microsoft
                         <FontAwesomeIcon icon={faMicrosoft} className="fs-5 ms-2" />
-                    </Button>
+                    </Button> */}
                     <Button
                         outline
                         color='danger'
