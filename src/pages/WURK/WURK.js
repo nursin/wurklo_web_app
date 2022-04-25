@@ -7,11 +7,19 @@ function WURK() {
         <Container fluid>
             <Row>
                 <Col>
+                    <h1 className='wurklo__textColor mb-0 text-center'>Pending</h1>
+                </Col>
+            </Row>
+            <Row className='m-5 mb-5'>
+
+            </Row>
+            <Row>
+                <Col>
                     <h1 className='wurklo__textColor mb-0 text-center'>Hired</h1>
                 </Col>
             </Row>
             <Row className='m-5 mb-5'>
-                <PerformEvalModal />
+
             </Row>
             <Row>
                 <Col>
@@ -19,7 +27,7 @@ function WURK() {
                 </Col>
             </Row>
             <Row className='m-5 mb-5'>
-
+                <PerformEvalModal />
             </Row>
             <Row>
                 <Col>

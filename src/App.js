@@ -44,7 +44,6 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/contacts" element={<Contacts />} />
-          <Route path="/wurk" element={<WURK />} />
         </Routes>
       </BrowserRouter>
     </div>

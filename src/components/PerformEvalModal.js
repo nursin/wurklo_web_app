@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Progress, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import firebase from 'firebase';
+//redux 
+import { useDispatch, useSelector } from 'react-redux';
+import { db } from '../firebase';
 
-function PerformEvalModal() {
+
+function PerformEvalModal({ id }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    // redux
+    const { user } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    // performance
     const [communication, setCommunication] = useState(5);
     const [reliable, setReliable] = useState(5);
     const [teamPlayer, setTeamPlayer] = useState(5);
@@ -14,7 +22,7 @@ function PerformEvalModal() {
     const [selfStarter, setSelfStarter] = useState(5);
     const [willingToLearn, setWillingToLearn] = useState(5);
     const [excellent, setExcellent] = useState(5);
-
+    // character
     const [honest, setHonest] = useState(5);
     const [culturallyCompetent, setCulturallyCompetent] = useState(5);
     const [professional, setProfessional] = useState(5);
@@ -28,7 +36,35 @@ function PerformEvalModal() {
 
 
     const handleSubmitEval = () => {
-        console.log('eval done')
+        db
+            .collection("reviews")
+            .doc(id)
+            .collection("review")
+            .doc(user.uid)
+            .set({
+                created: firebase.firestore.FieldValue.serverTimestamp(),
+                communication: Number(communication),
+                reliable: Number(reliable),
+                team_player: Number(teamPlayer),
+                problem_solver: Number(problemSolver),
+                responsible: Number(responsible),
+                adaptable: Number(adaptable),
+                time_management: Number(timeManagement),
+                self_starter: Number(selfStarter),
+                willing_to_learn: Number(willingToLearn),
+                excellent: Number(excellent),
+                honest: Number(honest),
+                culturally_competent: Number(culturallyCompetent),
+                professional: Number(professional),
+                creative: Number(creative),
+                passionate: Number(passionate),
+                curious: Number(curious),
+                friendly: Number(friendly),
+                motivated: Number(motivated),
+                safe: Number(safe),
+                leader: Number(leader)
+            })
+        setIsModalOpen(isModalOpen ? false : true)
     }
 
     return (
@@ -39,7 +75,7 @@ function PerformEvalModal() {
                 outline
                 onClick={() => setIsModalOpen(isModalOpen ? false : true)}
             >
-                Performance Evaluation
+                Review
             </Button>
             <Modal
                 className='createWurker__modal'
@@ -50,7 +86,7 @@ function PerformEvalModal() {
                 toggle={() => setIsModalOpen(isModalOpen ? false : true)}
             >
                 <ModalHeader toggle={() => setIsModalOpen(false)}>
-                    <h3 className='text-secondary m-0'><strong>Performance Evaluation</strong></h3>
+                    <h3 className='text-secondary m-0'><strong>Review</strong></h3>
                 </ModalHeader>
                 <ModalBody className='createWurker pt-0 pb-5'>
                     <p className='text-center text-danger mt-2 mb-0'>Score from 1 - 10 where 1 is least like the wurker, and 10 is most like the wurker.</p>

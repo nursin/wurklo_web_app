@@ -25,14 +25,14 @@ function ProfileInfo({ name, skill, rate, imageUrl, availability, phone, email, 
             </Col>
             <Col md={12} className="profileInfo__performanceEval mx-auto mx-md-2 mt-4 p-3 pb-5 text-center bg-white">
                 <p className='p-0 m-0'>Coming in Version 1.1.0</p>
-                <h2>Performance Evaluation</h2>
+                <h2>Review</h2>
                 <div className='d-flex justify-content-around'>
                     <h5>Performance</h5>
                     <h5>Character</h5>
                 </div>
                 <div className='profileInfo__imageContainer d-flex justify-content-around'>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/wurklo-web-app.appspot.com/o/wurklo_new_logo_white_blackbg.png?alt=media&token=fdf68760-e902-435e-b71f-c7778f1034a5" className="ms-0 ms-md-3" alt={name} />
-                    <img src="https://firebasestorage.googleapis.com/v0/b/wurklo-web-app.appspot.com/o/wurklo_new_logo_white_blackbg.png?alt=media&token=fdf68760-e902-435e-b71f-c7778f1034a5" className="ms-0 ms-md-3" alt={name} />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/wurklo-web-app.appspot.com/o/black_background_hammer.gif?alt=media&token=1c4d6232-79c8-441c-978a-a11d9be8f204" className="ms-0 ms-md-3" alt={name} />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/wurklo-web-app.appspot.com/o/black_background_hammer.gif?alt=media&token=1c4d6232-79c8-441c-978a-a11d9be8f204" className="ms-0 ms-md-3" alt={name} />
                 </div>
             </Col>
         </>
